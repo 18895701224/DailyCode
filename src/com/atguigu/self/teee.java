@@ -6,7 +6,7 @@ public class teee {
 		System.out.println("故事1");
 		System.out.println("结束了");
 		System.out.println("这是分支啊");
-	
+	 
 
 	}
 }
