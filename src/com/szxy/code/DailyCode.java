@@ -45,4 +45,28 @@ public class DailyCode {
 		}
 		System.out.println(count);
 	}
+	//冒泡排序
+	@Test
+	public void test3(){
+		double[] arr = new double[10];
+		for (int i = 0; i <arr.length ; i++) {
+			arr[i] = Math.random()*100;
+		}
+		for (int i = 0; i <arr.length-1 ; i++) {
+			for (int j = 0; j <arr.length-1-i ; j++) {
+				if(arr[j]<arr[j+1]){
+					double tem = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = tem;
+				}
+			}
+		}
+		for (double v : arr) {
+			System.out.println(v);
+		}
+
+
+
+
+	}
 }
