@@ -2,6 +2,8 @@ package com.szxy.code;
 
 import org.junit.Test;
 
+import javax.swing.*;
+
 public class DailyCode {
 	// 判断较长字符串里子字符串出现的次数，使用indexof;
 	@Test
@@ -93,4 +95,28 @@ public class DailyCode {
 		}
 
 	}
+	@Test
+	public  void yangHui(){
+		int[][]  ssr = new int[10][];
+		for (int i = 0; i < ssr.length; i++) {
+			ssr[i]  = new int[i+1];
+			ssr[i][0] = ssr[i][i] =1;
+			if(i>=2){
+				for (int j = 1; j < ssr[i].length-1; j++) {
+					ssr[i][j] =ssr[i-1][j-1] + ssr[i-1][j];
+
+				}
+			}
+		}
+		for (int i = 0;i<ssr.length;++i){
+			for (int j = 0;j<ssr[i].length;++j){
+				System.out.print(ssr[i][j] + "\t");
+			}
+			System.out.println();
+		}
+
+	}
+
+
+
 }
