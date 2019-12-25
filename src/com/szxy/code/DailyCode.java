@@ -120,3 +120,17 @@ public class DailyCode {
 
 
 }
+//饿汉式单例
+class Singleton1{
+	private Singleton1(){
+
+	}
+	private Singleton1 singel1 = new Singleton1();
+
+	public static Singleton1 getSinle1(Singleton1 singel1){
+		return singel1;
+	}
+
+
+
+}
