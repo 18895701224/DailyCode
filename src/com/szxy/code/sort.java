@@ -13,7 +13,7 @@ public class sort {
     @Test//测试大量数据所用时间
     public void sorts(){
         //定义一个数组
-        int[] arr = new int[1000];
+        int[] arr = new int[100000];
         Random r = new Random();
         //给数组元素赋值
         for (int i = 0; i < arr.length; i++) {
@@ -23,9 +23,9 @@ public class sort {
         //排序之前记录时间
         long start = System.currentTimeMillis();//获取到当前系统值的时间，以ms值表示的
         //排序的方法
-        //quickSort(arr,0,arr.length-1);
+        quickSort(arr,0,arr.length-1);
           //mpSort(arr);
-          selectSort(arr);
+         // selectSort(arr);
         //排序之后的时间
         long end = System.currentTimeMillis();
         //耗费时间
@@ -39,8 +39,8 @@ public class sort {
     public void sort(){
 
         int[] arr = {3,4,5,7,6,2,1,9,8,23,321,3213,43,3123};
-        //selectSort(arr);
-        quickSort(arr,0,arr.length-1);
+        selectSort(arr);
+       // quickSort(arr,0,arr.length-1);
       //  mpSort(arr);
         for (int i : arr) {
             System.out.println(i);
@@ -56,12 +56,9 @@ public class sort {
                     minIndex = j;
                 }
             }
-            if (minIndex != i){
                 int temp = arr[i];
                 arr[i] = arr[minIndex];
                 arr[minIndex] = temp;
-            }
-
         }
 //        for (int i : arr) {
 //            System.out.println(i);
@@ -86,7 +83,7 @@ public class sort {
 //        }
     }
     //快速排序
-    public void quickSort(int[] arr,int left,int right){
+    public void quickSort1(int[] arr,int left,int right){
         //先判断 left如果大于right 就return
         if(left > right ){
             return;
@@ -117,8 +114,38 @@ public class sort {
         arr[left] = arr[i];
         //将基准值赋给i;
         arr[i] = base;
-        quickSort(arr,left,i-1);
-        quickSort(arr,j+1,right);
+        quickSort1(arr,left,i-1);
+        quickSort1(arr,j+1,right);
 
     }
+
+    public void quickSort(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        int leftIndex = start;
+        int mid = (start + end) / 2;
+        int rightIndex = end;
+        int pivot = nums[mid];
+        while (leftIndex <= rightIndex) {
+            //等于的两边都去
+            while (leftIndex <= rightIndex && nums[leftIndex] < pivot) {
+                leftIndex++;
+            }
+            while (leftIndex <= rightIndex && nums[rightIndex] > pivot) {
+                rightIndex--;
+            }
+            if (leftIndex <= rightIndex) {
+                int tmp = nums[leftIndex];
+                nums[leftIndex] = nums[rightIndex];
+                nums[rightIndex] = tmp;
+                leftIndex++;
+                rightIndex--;
+            }
+        }
+        quickSort(nums, start, rightIndex);
+        quickSort(nums, leftIndex, end);
+    }
+
+
 }
