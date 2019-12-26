@@ -1,8 +1,10 @@
 package com.szxy.code;
 
+import com.sun.org.apache.xerces.internal.xs.ItemPSVI;
 import org.junit.Test;
 
 import javax.swing.*;
+import java.util.Random;
 
 public class DailyCode {
 	// 判断较长字符串里子字符串出现的次数，使用indexof;
@@ -117,20 +119,86 @@ public class DailyCode {
 
 	}
 
+	@Test
+	public void test11(){
+		Singleton1 s1 = Singleton1.getSinle1();
+		Singleton1 s2 = Singleton1.getSinle1();
+		System.out.println(s1 == s2);
+		Singleton2 s3 = Singleton2.getSingle2();
+		Singleton2 s4 = Singleton2.getSingle2();
+		System.out.println(s3 == s4);
+
+	}
+
+
+	//快速排序
+	public static void quickSort(int[] arr,int left,int right){
+		//判断 如果左边索引比右边索引大 直接结束
+		if(left > right){
+			return ;
+		}
+		//定义变量保存基准数   首先从右向左检索，比基准数小则停下，然后left从左向右走
+		int base = arr[left];
+		//定义变量i，指向最左边
+		int i = left;
+		//定义变量j,指向最右边
+		int j = right;
+		//当i 和 j不相遇的时候，在循环中进行检索
+		while(i != j){
+			//首先从右向左检索，比基准数小则停下,相反 如果检索到比基准数大或相等，则继续检索
+			while(arr[j] >= base && i < j){
+				j--;//j从右往左移动
+			}
+			while (arr[i] <= base && i < j ){
+				i++;//从左往右移动
+			}
+			//代码走到这里 i 停下 j 也停下 交换i 和 j位置元素的值
+			int tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+		}
+		//如果跳出了上面的循环则说明 i = j ，则将两值进行交换
+		//把相遇位置的元素赋值给基准数，
+		arr[left] = arr[i];
+		//把基准数的值赋给arr[i]
+		arr[i] = base;
+		//基准数已归位，左边全比基准数小，右边比基准数大
+		//排基准数左边
+		quickSort(arr,left,i-1);
+		//排基准数右边
+		quickSort(arr,j+1,right);
+	}
+	//选择排序
 
 
 }
-//饿汉式单例
+//设计模式是在大量的实践中总结和理论化之后优选的代码结构，编程风格以及解决问题的思考方式
+//饿汉式单例模式
 class Singleton1{
+	//私有化构造器
 	private Singleton1(){
-
 	}
-	private Singleton1 singel1 = new Singleton1();
-
-	public static Singleton1 getSinle1(Singleton1 singel1){
+	//静态方法只能访问类中的静态成员变量
+	private static Singleton1 singel1 = new Singleton1();
+	//声明成公共方法，方便外部调用
+	public static Singleton1 getSinle1(){
 		return singel1;
 	}
-
-
-
 }
+//懒汉式单例模式
+class Singleton2{
+	//私有化构造器
+	private Singleton2(){
+
+	}
+
+	private static  Singleton2 single2 = null;
+
+	public static  Singleton2 getSingle2(){
+		if(single2 == null){
+			single2 = new Singleton2();
+		}
+		return single2;
+	}
+}
+
